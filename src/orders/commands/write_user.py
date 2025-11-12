@@ -45,7 +45,7 @@ def delete_user(user_id: int):
     try:
         user = session.query(User).filter(User.id == user_id).first()
         if user:
-            # Sauvegarder les données de l'utilisateur avant la suppression
+
             user_name = user.name
             user_email = user.email
             user_type_id = user.user_type_id
