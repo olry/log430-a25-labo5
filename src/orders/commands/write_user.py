@@ -41,9 +41,20 @@ def delete_user(user_id: int):
     try:
         user = session.query(User).filter(User.id == user_id).first()
         if user:
+            # Sauvegarder les données de l'utilisateur avant la suppression
+            user_name = user.name
+            user_email = user.email
+            
             session.delete(user)
             session.commit()
-            # TODO: envoyer un evenement UserDeleted à Kafka
+            
+            # Envoyer l'événement UserDeleted à Kafka
+            user_event_producer = UserEventProducer()
+            user_event_producer.get_instance().send('user-events', value={'event': 'UserDeleted', 
+                                               'id': user_id, 
+                                               'name': user_name,
+                                               'email': user_email,
+                                               'datetime': str(datetime.datetime.now())})
             return 1  
         else:
             return 0  
