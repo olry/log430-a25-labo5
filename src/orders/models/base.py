@@ -6,5 +6,4 @@ Auteurs : Gabriel C. Ullmann, Fabio Petrillo, 2025
 
 from sqlalchemy.ext.declarative import declarative_base
 
-# Create the shared declarative base that all models will inherit from
 Base = declarative_base()

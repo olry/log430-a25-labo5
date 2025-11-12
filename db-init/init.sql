@@ -2,7 +2,6 @@
 CREATE DATABASE IF NOT EXISTS labo05_db;
 USE labo05_db;
 
--- User types table
 DROP TABLE IF EXISTS user_types;
 CREATE TABLE user_types (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -63,13 +62,11 @@ CREATE TABLE stocks (
     FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE RESTRICT
 );
 
--- Mock data: user types
 INSERT INTO user_types (name) VALUES
 ('Client'), -- 1
 ('Employee'), -- 2
 ('Manager'); -- 3
 
--- Mock data: users
 INSERT INTO users (name, email, user_type_id) VALUES
 ('Ada Lovelace', 'alovelace@example.com', 1),
 ('Adele Goldberg', 'agoldberg@example.com', 1),

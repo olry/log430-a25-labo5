@@ -53,7 +53,6 @@ def delete_user(user_id: int):
             session.delete(user)
             session.commit()
             
-            # Envoyer l'événement UserDeleted à Kafka
             user_event_producer = UserEventProducer()
             user_event_producer.get_instance().send('user-events', value={'event': 'UserDeleted', 
                                                'id': user_id, 
