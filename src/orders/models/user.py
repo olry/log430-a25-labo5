@@ -13,3 +13,4 @@ class User(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String, nullable=False)
     email = Column(String, nullable=False)
+    user_type_id = Column(Integer, nullable=False)
