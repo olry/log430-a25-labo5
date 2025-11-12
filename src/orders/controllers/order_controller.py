@@ -31,16 +31,13 @@ def update_order(request):
     logger.debug(f"Mettre à jour la commande {order_id}, status={is_paid}")
 
     try:
-        # update MySQL
         status = modify_order(order_id, is_paid=is_paid)
         
-        # update Redis
         r = get_redis_conn()
         order = r.hgetall(f"order:{order_id}")
         order['is_paid'] = str(is_paid)
         r.hset(f"order:{order_id}", mapping=order)
 
-        # response
         logger.debug("Statut actuel", status)
         return jsonify({'updated': status}), 200
     except Exception as e:
